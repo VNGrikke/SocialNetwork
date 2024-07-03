@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "name": "Nguyễn Văn Vương",
+      "email": "Thienvu24122005@gmail.com",
+      "phone": "0367675699",
+      "password": "$2a$10$Yu198aTIr2YrZCGwT/TbTO0YmmwGhtJi3.mB3MRTOyxbeS/w7a2QW",
+      "role": "ADMIN",
+      "status": "NOT-ACTIVE",
+      "posts": [],
+      "id": 1
+    }
+  ]
+}
