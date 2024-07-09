@@ -1,14 +1,101 @@
 {
   "users": [
     {
+      "avatarUrl": "",
+      "userName": "vng18t",
       "name": "Nguyễn Văn Vương",
       "email": "Thienvu24122005@gmail.com",
       "phone": "0367675699",
       "password": "$2a$10$Yu198aTIr2YrZCGwT/TbTO0YmmwGhtJi3.mB3MRTOyxbeS/w7a2QW",
       "role": "ADMIN",
-      "status": "NOT-ACTIVE",
+      "status": "ACTIVE",
       "posts": [],
       "id": 1
+    },
+    {
+      "avatarUrl": "",
+      "userName": "dtv18t",
+      "name": "Dinh thien vu",
+      "email": "Thienu24122005@gmail.com",
+      "phone": "0367675698",
+      "password": "$2a$10$m4YW..tUy9p/QFfBnm1X2.IYMPyrUEuyyQuIZtXgjojlXim5m.wFy",
+      "role": "USER",
+      "status": "NOT-ACTIVE",
+      "posts": [],
+      "id": 2
+    },
+    {
+      "avatarUrl": "",
+      "userName": "nvv17t",
+      "name": "Nguyễn Văn Vương",
+      "email": "vuongk5@gmail.com",
+      "phone": "0674537676",
+      "password": "$2a$10$SzKEoQsnZCO3Ju5mEGSkvOoctbqgRi17Lg/qCXij6KlZm.ecSXRt6",
+      "role": "USER",
+      "status": "NOT-ACTIVE",
+      "posts": [],
+      "id": 3
+    }
+  ],
+  "posts": [
+    {
+      "postImage": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTacA-IBHeRlTou6YG_FmfLGAKcsol22P_7Q&s"
+      ],
+      "PostId": 1,
+      "title": ":]]",
+      "content": "ảnh mèo 1.",
+      "createdAt": "8/9/2024-11:00 ",
+      "updatedAt": "8/9/2024-11:00 ",
+      "authorId": 1,
+      "amountOfInteraction": [
+        1,
+        2,
+        3
+      ],
+      "comments": [
+        {
+          "commentId": 1,
+          "content": "Rất tuyệt vời!",
+          "createdAt": "8/9/2024-11:05 ",
+          "authorId": 3
+        },
+        {
+          "commentId": 2,
+          "content": "Tuyệt vời!",
+          "createdAt": "8/9/2024-11:10 ",
+          "authorId": 2
+        }
+      ]
+    },
+    {
+      "postImage": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6yVzpUFpfx4YZOQUpA5URaREz-RCyPRwSIA&s"
+      ],
+      "PostId": 2,
+      "title": ":[[",
+      "content": "ảnh mèo 2",
+      "createdAt": "9/9/2024-11:00 ",
+      "updatedAt": "9/9/2024-11:00 ",
+      "authorId": 1,
+      "amountOfInteraction": [
+        1,
+        2
+      ],
+      "comments": [
+        {
+          "commentId": 1,
+          "content": "Rất tuyệt !",
+          "createdAt": "8/9/2024-11:05 ",
+          "authorId": 3
+        },
+        {
+          "commentId": 2,
+          "content": "Tuyệt !",
+          "createdAt": "8/9/2024-11:10 ",
+          "authorId": 2
+        }
+      ]
     }
   ]
 }

@@ -4,6 +4,7 @@ import Login from './pages/login/Login'
 import { Route, Routes } from 'react-router-dom'
 import Error from './components/error/Error'
 import Home from './pages/home/Home'
+import './App.css'
 
 export default function App() {
   return (

@@ -8,7 +8,27 @@ export default function Login() {
         email: '',
         password: ''
     });
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const navigate = useNavigate();
+
+    const validate = () => {
+        const errors: { [key: string]: string } = {};
+
+        if (!formData.email) {
+            errors.email = 'Cần nhập email';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            errors.email = 'Địa chỉ email không hợp lệ';
+        }
+
+        if (!formData.password) {
+            errors.password = 'Cần nhập mật khẩu';
+        } else if (formData.password.length < 6) {
+            errors.password = 'Mật khẩu phải dài hơn 6 kí tự';
+        }
+
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -21,19 +41,26 @@ export default function Login() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (!validate()) {
+            return;
+        }
+
         try {
             const response = await axios.get(`http://localhost:8888/users?email=${formData.email}`);
             const user = response.data[0];
 
             if (user && bcrypt.compareSync(formData.password, user.password)) {
-                alert('Đăng nhập thành công');
+                await axios.put(`http://localhost:8888/users/${user.id}`, {
+                    ...user,
+                    status: 'ACTIVE'
+                });
+                localStorage.setItem('userId', user.id); 
                 navigate('/home');
             } else {
-                alert('Email hoặc mật khẩu không đúng');
+                setErrors({ password: 'Sai thông tin đăng nhập' });
             }
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error);
-            alert('Đã xảy ra lỗi trong quá trình đăng nhập');
         }
     };
 
@@ -44,7 +71,7 @@ export default function Login() {
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className={`shadow appearance-none border ${errors.email ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         type="email"
                         name="email"
                         id="email"
@@ -52,11 +79,12 @@ export default function Login() {
                         onChange={handleChange}
                         required
                     />
+                    {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
                 </div>
                 <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password</label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className={`shadow appearance-none border ${errors.password ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         type="password"
                         name="password"
                         id="password"
@@ -64,6 +92,7 @@ export default function Login() {
                         onChange={handleChange}
                         required
                     />
+                    {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
                 </div>
                 <div className="flex items-center justify-between mb-6">
                     <label className="inline-flex items-center text-sm text-gray-700">
