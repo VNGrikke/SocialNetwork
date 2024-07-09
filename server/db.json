@@ -21,7 +21,8 @@
       "password": "$2a$10$m4YW..tUy9p/QFfBnm1X2.IYMPyrUEuyyQuIZtXgjojlXim5m.wFy",
       "role": "USER",
       "status": "NOT-ACTIVE",
-      "posts": [],
+      "posts"
+      : [],
       "id": 2
     },
     {
