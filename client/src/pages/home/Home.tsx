@@ -9,12 +9,16 @@ import CreateNewPost from '../../components/newpost/NewPost';
 import { getPosts } from '../../services/post.service';
 import { getUsers } from '../../services/user.service';
 import { Post, User } from '../../interfaces/interface';
+import axios from 'axios';
+interface User2 extends User {
+  id: number
+}
 
 export default function Home() {
   const navigate = useNavigate();
   const dispatch1 = useDispatch();
   const dispatch2 = useDispatch();
-  const [UserLogin, setUserLogin] = useState<User | null>(null);
+  const [userLogin, setUserLogin] = useState<User | null>(null);
   const userId = localStorage.getItem('userId');
 
   const [showCreatePost, setShowCreatePost] = useState(false);
@@ -27,13 +31,28 @@ export default function Home() {
     dispatch2(getUsers());
   }, [dispatch1, dispatch2]);
 
-  console.log(posts);
-  console.log(users);
+  useEffect(() => {
+    if (userId) {
+      const numericUserId = parseInt(userId, 10);
+      setUserLogin(users.find((user: User2) => user.id === numericUserId) || null);
+    }
+  }, [userId, users]);
 
-  const logOut = () => {
-    localStorage.removeItem('userId');
-    navigate('/login');
-  }
+  const logOut = async () => {
+    try {
+      if (userId) {
+        await axios.put(`http://localhost:8888/users/${userId}`, {
+          ...userLogin,
+          status: 'NOT-ACTIVE'
+        });
+      }
+      localStorage.removeItem('userId');
+      setUserLogin(null);
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
   if (postLoading || userLoading) {
     return <p>Loading...</p>;
@@ -85,7 +104,7 @@ export default function Home() {
             <div className='flex justify-center mt-9'>
               <ul className='flex flex-col posts'>
                 {posts.map((post: Post) => (
-                  <PostComponent key={post.PostId}  post={post} />
+                  <PostComponent key={post.id} post={post} />
                 ))}
                 <div className='flex justify-center my-[64px]'>Bạn đã xem hết rồi</div>
               </ul>
@@ -99,17 +118,17 @@ export default function Home() {
               <div>
                 {/* Thông tin người dùng */}
                 <div className='user flex justify-between'>
-                  <div className='flex'>
-                    {users[0]?.avatarUrl ? (
-                      <img src={users[0]?.avatarUrl} alt='avatar' className='h-[48px] w-[48px] rounded-[50%]' />
+                  <div className='flex gap-[10px]'>
+                    {userLogin && userLogin.avatarUrl ? (
+                      <img src={userLogin.avatarUrl} alt='avatar' className='h-[48px] w-[48px] rounded-[50%]' />
                     ) : (
                       <div className='h-[48px] w-[48px] avatar leading-[48px]'>
                         <i className="fa-solid fa-user"></i>
                       </div>
                     )}
-                    <div>
-                      <h2>{users[0]?.userName}</h2>
-                      <p>{users[0]?.name}</p>
+                    <div className='text-[13px]'>
+                      <h2>{userLogin?.userName}</h2>
+                      <p>{userLogin?.name}</p>
                     </div>
                   </div>
                   <div>
@@ -121,13 +140,13 @@ export default function Home() {
                 </div>
 
                 {/* Gợi ý kết bạn */}
-                <div className='flex justify-between my-4'>
+                <div className='flex justify-between my-4 '>
                   <div>Gợi ý cho bạn</div>
                   <div>Xem tất cả</div>
                 </div>
-                <div className='friends-suggested'>
+                <div className='friends-suggested text-[13px]'>
                   <ul className='flex flex-col gap-5'>
-                    
+
                     <li className='flex justify-between'>
                       <div className='flex'>
                         <div className='h-[48px] w-[48px] avatar leading-[48px]'>

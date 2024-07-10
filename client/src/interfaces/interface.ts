@@ -1,17 +1,18 @@
+//interfaces.ts
 export interface Post {
     postImage: string[];
-    PostId: number;
+    id: number;
     title: string;
-    content: string;
     createdAt: Date;
     updatedAt: Date;
     authorId: number;
     amountOfInteraction: number[];
     comments: Comment[];
+    status: "PUBLIC" | "PRIVATE";
 }
 
 export interface Comment {
-    CommentId: number;
+    id: number;
     content: string;
     createdAt: Date;
     authorId: number;
@@ -32,4 +33,5 @@ export interface User {
     role: string;
     status: "ACTIVE" | "NOT-ACTIVE" | "BANNED";
     posts: Post[];
+    friends: User[];
 }

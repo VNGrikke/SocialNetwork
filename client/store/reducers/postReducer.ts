@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPosts, addPost, deletePost, updatePost } from "../../src/services/post.service";
+import { getPosts, addPost, deletePost } from "../../src/services/post.service";
 import { Post } from "../../src/interfaces/interface";
 
 
@@ -39,9 +39,7 @@ const postsSlice = createSlice({
             .addCase(deletePost.fulfilled, (state, action) => {
                 state.items = state.items.filter((item) => item.PostId !== action.payload);
             })
-            .addCase(updatePost.fulfilled, (state, action) => {
-                state.items = state.items.map((item) => item.PostId === action.payload.PostId ? action.payload : item);
-            });
+            
     },
 });
 

@@ -1,38 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Post } from "../../src/interfaces/interface";
+import {getPosts, addPost, deletePost, updatePost} from "../../src/services/post.service";
 
-export const getPosts = createAsyncThunk<Post[]>(
-  "posts/getPosts",
-  async () => {
-    const response = await axios.get("http://localhost:8888/posts");
-    return response.data;
-  }
-);
-
-export const addPost = createAsyncThunk<Post, Post>(
-  "posts/addPost",
-  async (newPost: Post) => {
-    const response = await axios.post("http://localhost:8888/posts", newPost);
-    return response.data;
-  }
-);
-
-export const deletePost = createAsyncThunk<number, number>(
-  "posts/deletePost",
-  async (id: number) => {
-    await axios.delete(`http://localhost:8888/posts/${id}`);
-    return id;
-  }
-);
-
-export const updatePost = createAsyncThunk<Post, Post>(
-  "posts/updatePost",
-  async (updatedPost: Post) => {
-    const response = await axios.put(`http://localhost:8888/posts/${updatedPost.PostId}`, updatedPost);
-    return response.data;
-  }
-);
 
 interface PostState {
   items: Post[];

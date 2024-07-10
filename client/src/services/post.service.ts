@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Post, User, Comment } from "../interfaces/interface";
+import { Post } from "../interfaces/interface";
 import axios from "axios";
 
-export const getPosts:any = createAsyncThunk<Post[]>(
+export const getPosts: any = createAsyncThunk<Post[]>(
     "posts/getPosts",
     async () => {
         const response = await axios.get("http://localhost:8888/posts");
@@ -10,7 +10,7 @@ export const getPosts:any = createAsyncThunk<Post[]>(
     }
 );
 
-export const addPost:any = createAsyncThunk<Post, Post>(
+export const addPost: any = createAsyncThunk<Post, Post>(
     "posts/addPost",
     async (newPost: Post) => {
         const response = await axios.post("http://localhost:8888/posts", newPost);
@@ -18,7 +18,7 @@ export const addPost:any = createAsyncThunk<Post, Post>(
     }
 );
 
-export const deletePost:any = createAsyncThunk<number, number>(
+export const deletePost: any = createAsyncThunk<number, number>(
     "posts/deletePost",
     async (id: number) => {
         await axios.delete(`http://localhost:8888/posts/${id}`);
@@ -26,11 +26,5 @@ export const deletePost:any = createAsyncThunk<number, number>(
     }
 );
 
-export const updatePost:any = createAsyncThunk<Post, Post>(
-    "posts/updatePost",
-    async (updatedPost: Post) => {
-        const response = await axios.put(`http://localhost:8888/posts/${updatedPost.PostId}`, updatedPost);
-        return response.data;
-    }
-);
+
 

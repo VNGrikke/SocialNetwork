@@ -2,7 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { User } from "../interfaces/interface";
 import axios from "axios";
 
-
+interface User2 extends User {
+    id: number;
+}
 
 export const getUsers: any = createAsyncThunk<User[]>(
     "admin/getUsers",
@@ -19,12 +21,12 @@ export const getUsers: any = createAsyncThunk<User[]>(
     }
 );
 
-export const addUser = createAsyncThunk<User, User, { state: any }>(
+export const addUser = createAsyncThunk<User, User2, { state: any }>(
     "admin/addUser",
     async (user, { getState, rejectWithValue }) => {
         try {
             const state = getState();
-            const existingUser = state.users.items.find((item: User) => item.id === user.id);
+            const existingUser = state.users.items.find((item: User2) => item.id === user.id);
 
             if (existingUser) {
                 return rejectWithValue("User already exists");
@@ -41,7 +43,7 @@ export const addUser = createAsyncThunk<User, User, { state: any }>(
     }
 );
 
-export const updateUser:any = createAsyncThunk<User, User>(
+export const updateUser:any = createAsyncThunk<User, User2>(
     "admin/updateUser",
     async (user, { rejectWithValue }) => {
         try {
