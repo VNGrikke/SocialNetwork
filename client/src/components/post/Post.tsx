@@ -52,6 +52,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
         setOption(false);
     };
 
+
     const handleStatusChange = async (newStatus: 'PUBLIC' | 'PRIVATE', id: number, authorId: number) => {
         const userID = localStorage.getItem("userId");
 
@@ -71,11 +72,11 @@ const Post: React.FC<PostProps> = ({ post }) => {
             } catch (error) {
                 console.error("Lỗi khi cập nhật trạng thái bài viết:", error);
             }
-        }else{
+        } else {
             console.error("Bạn không có quyền chỉnh sửa bài viết này");
         }
         setShowPostStatus(false);
-    }
+    };
 
     return (
         <li className='post mb-[40px]'>
@@ -91,7 +92,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
                         )}
                     </div>
                     <div className='leading-[44px]'>{user?.userName}</div>
-                    <div className='leading-[44px]'>{new Date(post.createdAt).toLocaleString()}</div>
+                    <div className='leading-[44px]'>{`${post.createdAt}`}</div>
                     {post.status === 'PUBLIC' ? (
                         <span className="material-symbols-outlined text-[13px] leading-[44px]">public</span>
                     ) : (

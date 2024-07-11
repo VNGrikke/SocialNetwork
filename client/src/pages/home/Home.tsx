@@ -21,7 +21,7 @@ export default function Home() {
   const [userLogin, setUserLogin] = useState<User | null>(null);
   const userId = localStorage.getItem('userId');
 
-  const [showCreatePost, setShowCreatePost] = useState(false);
+  const [showCreatePost, setShowCreatePost] = useState<boolean>(false);
 
   const { items: posts, loading: postLoading, error: postError } = useSelector((state: any) => state.posts);
   const { items: users, loading: userLoading, error: userError } = useSelector((state: any) => state.users);
@@ -90,6 +90,7 @@ export default function Home() {
       {/* Main content */}
       <div className='fixed right-0 ml-2/12 w-10/12 h-[100vh] bg-black overflow-y-scroll'>
         <div className='main'>
+
           <div className='main-1'>
             {/* Danh sách stories */}
             <div>
@@ -99,7 +100,15 @@ export default function Home() {
                 <li className='story'></li>
               </ul>
             </div>
+            {
+              showCreatePost && (
+                <div className='background'>
+                  <i onClick={() => setShowCreatePost(false)} className="fa-solid fa-xmark text-[24px] absolute  right-[28px] top-[10px] cursor-pointer "></i>
+                  <CreateNewPost showCreatePost = {setShowCreatePost} />
+                </div>
 
+              )
+            }
             {/* Danh sách bài viết */}
             <div className='flex justify-center mt-9'>
               <ul className='flex flex-col posts'>

@@ -1,10 +1,20 @@
 //interfaces.ts
+export interface Timestamp {
+    day: string;
+    month: string;
+    year: number;
+    hours: string;
+    minutes: string;
+}
+
+
+
 export interface Post {
     postImage: string[];
     id: number;
     title: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Timestamp;
+    updatedAt: Timestamp;
     authorId: number;
     amountOfInteraction: number[];
     comments: Comment[];

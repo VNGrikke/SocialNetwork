@@ -103,6 +103,31 @@
         }
       ],
       "status": "PUBLIC"
+    },
+    {
+      "postImage": [
+        "https://firebasestorage.googleapis.com/v0/b/social-network-6cc1f.appspot.com/o/images%2FNguyenVanVuong-8-7.png?alt=media&token=b66d95c3-63ce-4a56-9332-cac08c24afaf"
+      ],
+      "title": "aa",
+      "createdAt": {
+        "day": "11",
+        "month": "07",
+        "year": 2024,
+        "hours": "15",
+        "minutes": "24"
+      },
+      "updatedAt": {
+        "day": "11",
+        "month": "07",
+        "year": 2024,
+        "hours": "15",
+        "minutes": "24"
+      },
+      "authorId": 3,
+      "amountOfInteraction": [],
+      "comments": [],
+      "status": "PUBLIC",
+      "id": 3
     }
   ]
 }

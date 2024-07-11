@@ -37,7 +37,7 @@ const postsSlice = createSlice({
                 state.items = [...state.items, action.payload];
             })
             .addCase(deletePost.fulfilled, (state, action) => {
-                state.items = state.items.filter((item) => item.PostId !== action.payload);
+                state.items = state.items.filter((item) => item.id !== action.payload);
             })
             
     },
